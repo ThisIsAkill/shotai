@@ -38,7 +38,21 @@ python scrape.py --tags close-up "wide shot" low-angle high-angle overhead --max
 ```
 
 With that setting (~390 images, 16 s to scrape, 30 s to embed on a CPU) the test set scored
-92% on close-up vs. wide and 67% on high/low/overhead angles. More pages and tags improve both.
+92% on close-up vs. wide and 67% on high/low/overhead angles.
+
+### Full dataset
+
+`python scrape.py` with the default tags gives 16,159 stills from 190 films (5 GB, about
+2,100 page requests). Embedding them takes ~19 min on a CPU and training ~30 s. Test set = held-out films:
+
+| Head | Classes | Images | Accuracy |
+|---|---|---|---|
+| Shot type | 7 (extreme close-up … extreme wide) | 15,897 | 64% exact, 97% within one step |
+| Angle | 4 (low, high, overhead, Dutch) | 1,609 | 76% (low 84% F1, high 76%, overhead 61%, Dutch 0%) |
+
+Almost all shot-type errors are between neighbouring sizes (medium shot vs. medium wide,
+wide vs. extreme wide), where tagging on shot.cafe is itself subjective. Dutch angle has only
+59 examples and is never predicted correctly yet.
 
 ## How it works
 
