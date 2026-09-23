@@ -1,0 +1,8 @@
+aiohttp
+beautifulsoup4
+joblib
+numpy
+pillow
+scikit-learn
+torch
+transformers
